@@ -17,7 +17,7 @@ function Login() {
   const handleSubmit = () => {
     console.log(state);
     if (state.email === "admin@admin.com" && state.password === "password") {
-      navigate("/page");
+      navigate("/detail/branch");
     }
   };
 

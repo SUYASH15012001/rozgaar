@@ -2,6 +2,7 @@ import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
+import BranchDetails from "./routes/BranchDetails";
 import Login from "./routes/Login";
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="about" element={<About />} />
+        <Route path="/detail/branch" element={<BranchDetails />} />
       </Routes>
     </div>
   );
