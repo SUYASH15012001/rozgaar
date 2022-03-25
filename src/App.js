@@ -1,44 +1,36 @@
 import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import "./routes/Analytics";
-import Analytics from "./routes/Analytics";
+import Header from "./components/Header";
+import BranchDetails from "./routes/BranchDetails";
+import Login from "./routes/Login";
+import CollegeDetails from "./routes/CollegeDetails";
 
 export default function App() {
   return (
     <div className="App">
-      <h1>Welcome to React Router!</h1>
+      <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<Analytics />} />
+        <Route path="/" element={<Login />} />
+        <Route path="about" element={<About />} />
+        <Route path="/detail/branch/:bName" element={<BranchDetails />} />
+        <Route path="about" element={<CollegeDetails />} />
+
       </Routes>
     </div>
   );
 }
-function Home() {
+
+function About() {
   return (
     <>
       <main>
-        <h2>Welcome to the homepage!</h2>
-        <p>You can do this, I believe in you.</p>
+        <h2>Who are we?</h2>
+        <p>That feels like an existential question, don't you think?</p>
       </main>
       <nav>
-        <Link to="/about">About</Link>
+        <Link to="/">Home</Link>
       </nav>
     </>
   );
 }
-
-// function About() {
-//   return (
-//     <>
-//       <main>
-//         <h2>Who are we?</h2>
-//         <p>That feels like an existential question, don't you think?</p>
-//       </main>
-//       <nav>
-//         <Link to="/">Home</Link>
-//       </nav>
-//     </>
-//   );
-// }
