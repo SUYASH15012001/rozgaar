@@ -4,33 +4,23 @@ import "./App.css";
 import Header from "./components/Header";
 import BranchDetails from "./routes/BranchDetails";
 import Login from "./routes/Login";
+import "./routes/Analytics";
+import "./routes/CollegeDetails";
+import Analytics from "./routes/Analytics";
 import CollegeDetails from "./routes/CollegeDetails";
-
 export default function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
+
         <Route path="/" element={<Login />} />
-        <Route path="about" element={<About />} />
-        <Route path="/detail/branch/:bName" element={<BranchDetails />} />
-        <Route path="about" element={<CollegeDetails />} />
+        <Route path="about" element={<Analytics />} />
+        <Route path="/detail/branch" element={<BranchDetails />} />
+        <Route path="/detail" element={<CollegeDetails/>} />
 
       </Routes>
     </div>
   );
 }
 
-function About() {
-  return (
-    <>
-      <main>
-        <h2>Who are we?</h2>
-        <p>That feels like an existential question, don't you think?</p>
-      </main>
-      <nav>
-        <Link to="/">Home</Link>
-      </nav>
-    </>
-  );
-}
