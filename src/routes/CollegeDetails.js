@@ -1,134 +1,39 @@
+import { Container, Grid, Typography } from "@mui/material";
 import React from "react";
-// import { Pie } from "react-chartjs-2";
-// import { Chart, ArcElement } from "chart.js";
+import { useNavigate } from "react-router-dom";
 import { PieChart } from "../components/PieChart";
-// import { Row, Col } from "react-grid-system";
-// import Grid from "react-bootstrap/Container";
-// import Box from "@mui/material/Box";
-// Chart.register(ArcElement);
-// const state = {
-//   labels: ["Placed", "Unplaced"],
-//   datasets: [
-//     {
-//       label: "PlacementData",
-//       backgroundColor: ["#B21F00", "#C9DE00"],
-
-//       hoverBackgroundColor: ["#501800", "#4B5000"],
-//       data: [80, 200],
-//       radius: 200,
-//     },
-//   ],
-// };
+import { state } from "../global";
 
 export default function CollegeDetails() {
+  const navigate = useNavigate();
   return (
     <>
-      <PieChart />
-      {/* <Box sx={{ width: "100%" }}>
-        <Grid container rowSpacing={11} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Row>
-            <Col sm={4}>
-              <Pie
-                data={state}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Placement Data",
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              />
-            </Col>
-            <Col sm={4}>
-              <Pie
-                data={state}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Placement Data",
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              />
-            </Col>
-            <Col sm={4}>
-              <Pie
-                data={state}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Placement Data",
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              />
-            </Col>
-          </Row>
-
-          <Row>
-            <Col sm={4}>
-              <Pie
-                data={state}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Placement Data",
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              />
-            </Col>
-            <Col sm={4}>
-              <Pie
-                data={state}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Placement Data",
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              />
-            </Col>
-            <Col sm={4}>
-              <Pie
-                data={state}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Placement Data",
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              />
-            </Col>
-          </Row>
+      <Grid container>
+        <Grid item xs={12} sm={4} />
+        <Grid
+          item
+          onClick={() => navigate(`/detail/branch/all`)}
+          xs={12}
+          sm={4}>
+          <PieChart placed={state.tPlaced} notPlaced={state.tNonPlaced} />
+          <Typography marginTop={2}>Overall College Placements</Typography>
         </Grid>
-      </Box> */}
+        <Grid item xs={12} sm={4} />
+      </Grid>
+      <Container>
+        <Grid style={{ marginTop: 10 }} container spacing={10}>
+          {state.branches.map((br) => (
+            <Grid
+              item
+              onClick={() => navigate(`/detail/branch/${br.label}`)}
+              xs={12}
+              sm={4}>
+              <PieChart placed={br.placed} notPlaced={br.notPlaced} />
+              <Typography marginTop={2}> {br.label} Placements</Typography>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </>
   );
 }

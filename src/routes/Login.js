@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-function Login() {
+// import { state as globalState } from "../global";
+function Login({ isSignedIn, setIsSignedIn }) {
   const [state, setState] = React.useState({
     email: "",
     password: "",
@@ -17,7 +17,9 @@ function Login() {
   const handleSubmit = () => {
     console.log(state);
     if (state.email === "admin@admin.com" && state.password === "password") {
-      navigate("/detail/branch");
+      localStorage.setItem("isSignedIn", "true");
+      setIsSignedIn(true);
+      navigate("/detail");
     }
   };
 

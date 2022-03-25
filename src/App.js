@@ -4,21 +4,22 @@ import "./App.css";
 import Header from "./components/Header";
 import BranchDetails from "./routes/BranchDetails";
 import Login from "./routes/Login";
-// import "./routes/Analytics";
-// import "./routes/CollegeDetails";
-// import Analytics from "./routes/Analytics";
 import CollegeDetails from "./routes/CollegeDetails";
 export default function App() {
+  const [isSignedIn, setIsSignedIn] = React.useState(
+    localStorage.getItem("isSignedIn") === "true"
+  );
   return (
     <div className="App">
-      <Header />
+      <Header isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />
       <Routes>
-        <Route path="/" element={<Login />} />
-        {/* <Route path="about" element={<About />} /> */}
+        <Route
+          path="/"
+          element={
+            <Login isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />
+          }
+        />
         <Route path="/detail/branch/:bName" element={<BranchDetails />} />
-        {/* <Route path="/" element={<Login />} /> */}
-        {/* <Route path="about" element={<Analytics />} /> */}
-        {/* <Route path="/detail/branch" element={<BranchDetails />} /> */}
         <Route path="/detail" element={<CollegeDetails />} />
       </Routes>
     </div>

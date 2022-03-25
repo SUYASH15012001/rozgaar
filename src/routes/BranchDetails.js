@@ -15,8 +15,6 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EmailIcon from "@mui/icons-material/Email";
 import { useParams } from "react-router-dom";
@@ -117,7 +115,7 @@ const EnhancedTableToolbar = (props) => {
           variant="h6"
           id="tableTitle"
           component="div">
-          Nutrition
+          Students not placed yet
         </Typography>
       )}
 
@@ -140,7 +138,6 @@ export default function BranchDetails() {
   const { bName } = useParams();
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleSelectAllClick = (event) => {
@@ -181,10 +178,6 @@ export default function BranchDetails() {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
@@ -198,7 +191,7 @@ export default function BranchDetails() {
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}>
+            size={"medium"}>
             <EnhancedTableHead
               numSelected={selected.length}
               onSelectAllClick={handleSelectAllClick}
@@ -206,7 +199,11 @@ export default function BranchDetails() {
             />
             <TableBody>
               {rows
-                .filter((a) => a.branch.toLowerCase() === bName.toLowerCase())
+                .filter(
+                  (a) =>
+                    bName === "all" ||
+                    a.branch.toLowerCase() === bName.toLowerCase()
+                )
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -248,15 +245,13 @@ export default function BranchDetails() {
                           <EmailIcon />
                         </IconButton>
                       </TableCell>
-                      <TableCell align="right">{row.emailId}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 53 * emptyRows,
                   }}>
                   <TableCell colSpan={6} />
                 </TableRow>
@@ -268,8 +263,11 @@ export default function BranchDetails() {
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={
-            rows.filter((a) => a.branch.toLowerCase() === bName.toLowerCase())
-              .length
+            rows.filter(
+              (a) =>
+                bName === "all" ||
+                a.branch.toLowerCase() === bName.toLowerCase()
+            ).length
           }
           rowsPerPage={rowsPerPage}
           page={page}
@@ -277,10 +275,6 @@ export default function BranchDetails() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </Box>
   );
 }

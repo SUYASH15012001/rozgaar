@@ -23,5 +23,26 @@ const StudentInfo = [
   createData("Oreo", 9, "CSE", "registrar@abes.ac.in"),
 ];
 
-let state = {};
+let state = {
+  branches: [
+    {
+      label: "CSE",
+      placed: 120,
+      notPlaced: 200,
+    },
+    {
+      label: "IT",
+      placed: 100,
+      notPlaced: 200,
+    },
+    {
+      label: "ME",
+      placed: 50,
+      notPlaced: 200,
+    },
+  ],
+  tPlaced: 270,
+  tNonPlaced: 600,
+  // isSignedIn: false,
+};
 export { state, StudentInfo };
