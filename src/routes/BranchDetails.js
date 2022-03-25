@@ -137,7 +137,6 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function BranchDetails() {
-  //   console.log(props);
   const { bName } = useParams();
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
@@ -249,6 +248,8 @@ export default function BranchDetails() {
                           <EmailIcon />
                         </IconButton>
                       </TableCell>
+                      <TableCell align="right">{row.emailId}</TableCell>
+                      <TableCell align="right">{row.protein}</TableCell>
                     </TableRow>
                   );
                 })}
