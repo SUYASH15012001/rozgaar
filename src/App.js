@@ -8,6 +8,7 @@ import "./routes/Analytics";
 import "./routes/CollegeDetails";
 import Analytics from "./routes/Analytics";
 import CollegeDetails from "./routes/CollegeDetails";
+import AddForm from "./routes/AddForm";
 export default function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="about" element={<Analytics />} />
         <Route path="/detail/branch" element={<BranchDetails />} />
         <Route path="/detail" element={<CollegeDetails/>} />
+        <Route path="/add" element={<AddForm/>} />
 
       </Routes>
     </div>
