@@ -18,31 +18,9 @@ import Tooltip from "@mui/material/Tooltip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
-
-function createData(name, sgpa, branch, emailId) {
-  return {
-    name,
-    sgpa,
-    branch,
-    emailId,
-  };
-}
-
-const rows = [
-  createData("Cupcake", 9, "CSE", "registrar@abes.ac.in"),
-  createData("Donut", 8.6, "IT", "registrar@abes.ac.in"),
-  createData("Eclair", 8.6, "IT", "registrar@abes.ac.in"),
-  createData("Frozen yoghurt", 9, "CSE", "registrar@abes.ac.in"),
-  createData("Gingerbread", 8.6, "IT", "registrar@abes.ac.in"),
-  createData("Honeycomb", 8.6, "IT", "registrar@abes.ac.in"),
-  createData("Ice cream sandwich", 9, "CSE", "registrar@abes.ac.in"),
-  createData("Jelly Bean", 8.6, "IT", "registrar@abes.ac.in"),
-  createData("KitKat", 9, "CSE", "registrar@abes.ac.in"),
-  createData("Lollipop", 8.6, "IT", "registrar@abes.ac.in"),
-  createData("Marshmallow", 9, "CSE", "registrar@abes.ac.in"),
-  createData("Nougat", 8.6, "IT", "registrar@abes.ac.in"),
-  createData("Oreo", 9, "CSE", "registrar@abes.ac.in"),
-];
+import EmailIcon from "@mui/icons-material/Email";
+import { useParams } from "react-router-dom";
+import { StudentInfo as rows } from "../global";
 
 const headCells = [
   {
@@ -159,6 +137,8 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function BranchDetails() {
+  //   console.log(props);
+  const { bName } = useParams();
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -208,7 +188,6 @@ export default function BranchDetails() {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -228,6 +207,7 @@ export default function BranchDetails() {
             />
             <TableBody>
               {rows
+                .filter((a) => a.branch.toLowerCase() === bName.toLowerCase())
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -236,7 +216,6 @@ export default function BranchDetails() {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -244,6 +223,7 @@ export default function BranchDetails() {
                       selected={isItemSelected}>
                       <TableCell padding="checkbox">
                         <Checkbox
+                          onClick={(event) => handleClick(event, row.name)}
                           color="primary"
                           checked={isItemSelected}
                           inputProps={{
@@ -260,8 +240,15 @@ export default function BranchDetails() {
                       </TableCell>
                       <TableCell align="right">{row.sgpa}</TableCell>
                       <TableCell align="right">{row.branch}</TableCell>
-                      <TableCell align="right">{row.emailId}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">
+                        <IconButton
+                          color="primary"
+                          onClick={() => {
+                            window.location = `mailto:${row.emailId}`;
+                          }}>
+                          <EmailIcon />
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -279,7 +266,10 @@ export default function BranchDetails() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={
+            rows.filter((a) => a.branch.toLowerCase() === bName.toLowerCase())
+              .length
+          }
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
