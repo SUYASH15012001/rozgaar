@@ -44,7 +44,7 @@ export default function App() {
 
         <Route
           path="/detail"
-          element={<CollegeDetails isSignedIn={isSignedIn} />}
+          element={<CollegeDetails isSignedIn={isSignedIn} state={state} />}
         />
       </Routes>
     </div>

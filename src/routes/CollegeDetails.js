@@ -2,10 +2,10 @@ import { Container, Grid, Typography, IconButton } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { PieChart } from "../components/PieChart";
-import { state } from "../global";
+// import { state } from "../global";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
-export default function CollegeDetails({ isSignedIn }) {
+export default function CollegeDetails({ isSignedIn, state }) {
   const navigate = useNavigate();
   return (
     <>

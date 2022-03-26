@@ -13,6 +13,7 @@ function AddStudent({
     sgpa: 0,
     branch: "CSE",
     emailId: "",
+    placed: false,
   });
 
   const navigate = useNavigate();
@@ -34,6 +35,22 @@ function AddStudent({
   const handleSubmit = () => {
     console.log(state);
     setStudentInfo([...StudentInfo, { ...state }]);
+    let newBranches = globalState.branches.map((br) => {
+      if (br.label === state.branch) {
+        let newBranchObj = {
+          ...br,
+          placed: br.placed + (state.placed ? 1 : 0),
+          notPlaced: br.notPlaced + (state.placed ? 0 : 1),
+        };
+        // console.log(newBranchObj);
+        return newBranchObj;
+      } else return br;
+    });
+    // console.log(newBranches);
+    globalSetState({
+      ...globalState,
+      branches: newBranches,
+    });
     navigate("/detail");
   };
 
@@ -126,7 +143,22 @@ function AddStudent({
                     item
                     xs={12}
                     sm={6}>
-                    <FormControlLabel control={<Switch />} label="Placed ?" />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          name="placed"
+                          checked={state.placed}
+                          onChange={(e) => {
+                            console.log(state);
+                            setState({
+                              ...state,
+                              placed: e.target.checked,
+                            });
+                          }}
+                        />
+                      }
+                      label="Placed ?"
+                    />
                   </Grid>
                   <Grid
                     item
