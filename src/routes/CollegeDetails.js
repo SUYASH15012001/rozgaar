@@ -39,7 +39,8 @@ export default function CollegeDetails({ isSignedIn, state }) {
               onClick={() => navigate(`/detail/branch/${br.label}`)}
               xs={12}
               sm={4}>
-              <PieChart placed={br.placed} notPlaced={br.notPlaced} />
+              <PieChart placed={br.placed} notPlaced={br.notPlaced} pcolor={br.pcolor} scolor={br.scolor}
+              bscolor={br.bscolor} bpcolor={br.bpcolor} />
               <Typography marginTop={2}> {br.label} Placements</Typography>
             </Grid>
           ))}
