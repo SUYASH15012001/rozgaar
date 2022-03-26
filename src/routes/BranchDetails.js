@@ -18,7 +18,6 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EmailIcon from "@mui/icons-material/Email";
 import { useParams } from "react-router-dom";
-import { StudentInfo as rows } from "../global";
 
 const headCells = [
   {
@@ -134,7 +133,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function BranchDetails() {
+export default function BranchDetails({ rows }) {
   const { bName } = useParams();
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);

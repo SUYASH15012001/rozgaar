@@ -1,14 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { state } from "../global";
 
 function Header({ isSignedIn, setIsSignedIn }) {
   const navigate = useNavigate();
+  const handleFunc = () => {
+    if (isSignedIn) {
+      navigate("/detail");
+    } else {
+      navigate("/");
+    }
+  };
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <a
           href="#"
+          onClick={handleFunc}
           className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +52,12 @@ function Header({ isSignedIn, setIsSignedIn }) {
             </svg>
           </button>
         ) : (
-          <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+          <button
+            className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+            onClick={() => {
+              navigate("/list");
+              // setIsSignedIn(false);
+            }}>
             View All Colleges
             <svg
               fill="none"

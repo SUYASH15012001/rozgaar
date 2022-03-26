@@ -1,10 +1,11 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography, IconButton } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { PieChart } from "../components/PieChart";
 import { state } from "../global";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
-export default function CollegeDetails() {
+export default function CollegeDetails({ isSignedIn }) {
   const navigate = useNavigate();
   return (
     <>
@@ -18,7 +19,17 @@ export default function CollegeDetails() {
           <PieChart placed={state.tPlaced} notPlaced={state.tNonPlaced} />
           <Typography marginTop={2}>Overall College Placements</Typography>
         </Grid>
-        <Grid item xs={12} sm={4} />
+        <Grid item xs={12} sm={4}>
+          {isSignedIn ? (
+            <IconButton
+              onClick={() => navigate("/add")}
+              color="primary"
+              size="small">
+              <PersonAddIcon />
+              &nbsp;Add Student
+            </IconButton>
+          ) : null}
+        </Grid>
       </Grid>
       <Container>
         <Grid style={{ marginTop: 10 }} container spacing={10}>
