@@ -27,7 +27,7 @@ export default function App() {
         />
         <Route
           path="/detail/branch/:bName"
-          element={<BranchDetails rows={StudentInfo} />}
+          element={<BranchDetails rows={StudentInfo} isSignedIn={isSignedIn} />}
         />
         <Route
           path="/add"

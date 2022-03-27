@@ -1,5 +1,7 @@
+import { Timer } from "@mui/icons-material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 // import { state as globalState } from "../global";
 function Login({ isSignedIn, setIsSignedIn }) {
   const [state, setState] = React.useState({
@@ -20,6 +22,13 @@ function Login({ isSignedIn, setIsSignedIn }) {
       localStorage.setItem("isSignedIn", "true");
       setIsSignedIn(true);
       navigate("/detail");
+    } else {
+      Swal.fire({
+        title: "403",
+        text: "Access Denied",
+        icon: "error",
+        timer: 2000,
+      });
     }
   };
 
@@ -81,7 +90,6 @@ function Login({ isSignedIn, setIsSignedIn }) {
               className="text-white bg-blue-500 disaled:bg-gray-100 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">
               Button
             </button>
-           
           </div>
         </div>
       </section>

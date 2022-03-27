@@ -50,6 +50,8 @@ function AddStudent({
     globalSetState({
       ...globalState,
       branches: newBranches,
+      tPlaced: globalState.tPlaced + (state.placed ? 1 : 0),
+      tNonPlaced: globalState.tNonPlaced + (state.placed ? 0 : 1),
     });
     navigate("/detail");
   };

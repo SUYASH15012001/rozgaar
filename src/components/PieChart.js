@@ -4,19 +4,30 @@ import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip);
 
-export function PieChart({ placed, notPlaced,pcolor,scolor,bscolor,bpcolor}) {
+export function PieChart({
+  placed,
+  notPlaced,
+  pcolor,
+  scolor,
+  bscolor,
+  bpcolor,
+}) {
   let data = {
-    labels: ["Not Placed", "Placed"],
+    labels: ["Placed", "Not Placed"],
     datasets: [
       {
         data: [placed || 120, notPlaced || 200],
-        backgroundColor: [pcolor||"rgba(250, 99, 132, 0.5)", scolor||"rgba(75, 192, 192, 0.7)"],
-        borderColor: [bpcolor||"rgba(255, 99, 132, 1)", bscolor||"rgba(75, 192, 192, 1)"],
+        backgroundColor: [
+          pcolor || "rgba(250, 99, 132, 0.5)",
+          scolor || "rgba(75, 192, 192, 0.7)",
+        ],
+        borderColor: [
+          bpcolor || "rgba(255, 99, 132, 1)",
+          bscolor || "rgba(75, 192, 192, 1)",
+        ],
         borderWidth: 1,
-      
-        },
+      },
     ],
-  
   };
 
   return (

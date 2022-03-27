@@ -18,6 +18,8 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EmailIcon from "@mui/icons-material/Email";
 import { useParams } from "react-router-dom";
+import DoneIcon from "@mui/icons-material/Done";
+import CloseIcon from "@mui/icons-material/Close";
 
 const headCells = [
   {
@@ -37,6 +39,12 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: "Branch",
+  },
+  {
+    id: "Placed",
+    numeric: true,
+    disablePadding: false,
+    label: "Placed",
   },
   {
     id: "mailStud",
@@ -133,7 +141,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function BranchDetails({ rows }) {
+export default function BranchDetails({ rows, isSignedIn }) {
   const { bName } = useParams();
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
@@ -218,6 +226,7 @@ export default function BranchDetails({ rows }) {
                       selected={isItemSelected}>
                       <TableCell padding="checkbox">
                         <Checkbox
+                          // disabled={!isSignedIn}
                           onClick={(event) => handleClick(event, row.name)}
                           color="primary"
                           checked={isItemSelected}
@@ -235,6 +244,13 @@ export default function BranchDetails({ rows }) {
                       </TableCell>
                       <TableCell align="right">{row.sgpa}</TableCell>
                       <TableCell align="right">{row.branch}</TableCell>
+                      <TableCell align="right">
+                        {row.placed ? (
+                          <DoneIcon color="primary" />
+                        ) : (
+                          <CloseIcon color="error" />
+                        )}
+                      </TableCell>
                       <TableCell align="right">
                         <IconButton
                           color="primary"
